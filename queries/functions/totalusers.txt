@@ -8,3 +8,9 @@ BEGIN
 END //
 
 DELIMITER ;
+
+
+SELECT TotalUsers();
+
+SELECT * FROM User
+WHERE id > TotalUsers() / 2; // id do usuário que está na metade da tabela

@@ -1,0 +1,18 @@
+DELIMITER //
+
+CREATE FUNCTION IsUserExists(userEmail VARCHAR(100))
+RETURNS BOOLEAN
+READS SQL DATA
+BEGIN
+    DECLARE user_exists INT;
+    SELECT COUNT(*) INTO user_exists
+    FROM User
+    WHERE email = userEmail
+    LIMIT 1;
+
+    RETURN user_exists > 0;
+END //
+
+DELIMITER ;
+
+SELECT IsUserExists('teste@hotmail.com'); 1 é true e 0 é false

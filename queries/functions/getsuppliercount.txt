@@ -1,6 +1,8 @@
 DELIMITER //
 
-CREATE FUNCTION GetSupplierCount() RETURNS INT
+CREATE FUNCTION GetSupplierCount() 
+RETURNS INT 
+READS SQL DATA
 BEGIN
     DECLARE totalSuppliers INT;
     SELECT COUNT(*) INTO totalSuppliers FROM Supplier;
@@ -8,3 +10,5 @@ BEGIN
 END //
 
 DELIMITER ;
+
+SELECT GetSupplierCount();

@@ -1,0 +1,21 @@
+DELIMITER //
+
+CREATE FUNCTION CategoriaComMaisProdutos()
+RETURNS INT
+READS SQL DATA
+BEGIN
+    DECLARE categoria_mais_popular INT;
+    SELECT category_id INTO categoria_mais_popular
+    FROM Product
+    GROUP BY category_id
+    ORDER BY COUNT(*) DESC
+    LIMIT 1;
+    RETURN categoria_mais_popular;
+END //
+
+DELIMITER ;
+
+
+SELECT CategoriaComMaisProdutos();
+
+SELECT GetAverageProductPrice();

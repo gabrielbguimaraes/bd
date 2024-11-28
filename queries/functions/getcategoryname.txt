@@ -1,0 +1,14 @@
+DELIMITER //
+DROP FUNCTION IF EXISTS GetCategoryName;
+CREATE FUNCTION GetCategoryName(categoryId INT)
+RETURNS VARCHAR(100)
+READS SQL DATA
+BEGIN
+    DECLARE categoryName VARCHAR(100);
+    SELECT category_name INTO categoryName FROM Category WHERE category_id = categoryId;
+    RETURN categoryName;
+END //
+
+DELIMITER ;
+
+SELECT GetCategoryName(2);
