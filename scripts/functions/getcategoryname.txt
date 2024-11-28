@@ -1,0 +1,10 @@
+DELIMITER //
+
+CREATE FUNCTION GetCategoryName(categoryId INT) RETURNS VARCHAR(100)
+BEGIN
+    DECLARE categoryName VARCHAR(100);
+    SELECT name INTO categoryName FROM Category WHERE category_id = categoryId;
+    RETURN categoryName;
+END //
+
+DELIMITER ;

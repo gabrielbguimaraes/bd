@@ -1,0 +1,9 @@
+DELIMITER //
+
+CREATE PROCEDURE DeletePerishableProducts()
+BEGIN
+    DELETE FROM Product
+    WHERE is_perishable = 1;
+END //
+
+DELIMITER ;

@@ -1,0 +1,15 @@
+DELIMITER $$
+
+CREATE TRIGGER before_insert_product
+BEFORE INSERT ON Product
+FOR EACH ROW
+BEGIN
+    IF NEW.product_stock > 1000 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'O estoque máximo permitido é 1000 unidades.';
+    END IF;
+END $$
+
+DELIMITER ;
+
+INSERT INTO Product (product_name, product_stock, category_id, supplier_id, unit_id)
+VALUES ('Novo Produto', 999, 1, 1, 1);

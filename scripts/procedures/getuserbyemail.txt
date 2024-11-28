@@ -1,0 +1,10 @@
+DELIMITER //
+
+CREATE PROCEDURE GetUserByEmail(IN userEmail VARCHAR(100))
+BEGIN
+    SELECT * FROM User WHERE email = userEmail;
+END //
+
+DELIMITER ;
+
+// CALL GetUserByEmail('teste@hotmail.com');

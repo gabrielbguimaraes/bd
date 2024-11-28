@@ -1,0 +1,8 @@
+DELIMITER //
+
+CREATE PROCEDURE AddUser(IN userName VARCHAR(100), IN userEmail VARCHAR(100))
+BEGIN
+    INSERT INTO User (name, email) VALUES (userName, userEmail);
+END //
+
+DELIMITER ;

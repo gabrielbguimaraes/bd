@@ -1,0 +1,10 @@
+DELIMITER //
+
+CREATE FUNCTION GetAverageProductPrice() RETURNS DECIMAL(10,2)
+BEGIN
+    DECLARE avgPrice DECIMAL(10,2);
+    SELECT AVG(price) INTO avgPrice FROM Product;
+    RETURN avgPrice;
+END //
+
+DELIMITER ;

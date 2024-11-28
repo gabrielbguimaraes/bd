@@ -1,0 +1,20 @@
+-- Remover a trigger de log atual se existir
+DROP TRIGGER IF EXISTS AfterDeleteProduct;
+
+-- Criação da trigger para registrar a exclusão de produtos
+DELIMITER //
+
+CREATE TRIGGER AfterDeleteProduct
+AFTER DELETE ON Product
+FOR EACH ROW
+BEGIN
+    -- Inserir registro na tabela Trigger ao deletar um produto
+	INSERT INTO TriggerLog (log_message, log_time)
+	VALUES (CONCAT('Produto com ID ', OLD.product_id, ' e nome "', OLD.product_name, '" foi deletado.'), NOW());
+END //
+
+DELIMITER ;
+
+UPDATE Batch SET product_id = NULL WHERE product_id = 50;
+DELETE FROM Product WHERE product_id = 50;
+

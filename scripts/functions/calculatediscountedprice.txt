@@ -1,0 +1,12 @@
+DELIMITER $$
+CREATE FUNCTION is_product_low_stock(p_product_id INT)
+RETURNS BOOLEAN
+BEGIN
+    DECLARE current_stock INT;
+    SELECT product_stock INTO current_stock
+    FROM Product
+    WHERE product_id = p_product_id;
+
+    RETURN current_stock <= product_stock_min * 1.2; -- Ajustar o fator 1.2 conforme necessário
+END $$
+DELIMITER ;

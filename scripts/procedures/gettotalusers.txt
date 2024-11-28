@@ -1,0 +1,11 @@
+DELIMITER //
+
+CREATE PROCEDURE GetTotalUsers(OUT totalUsers INT)
+BEGIN
+    SELECT COUNT(*) INTO totalUsers FROM User;
+END //
+
+DELIMITER ;
+
+// CALL GetTotalUsers(@total);
+SELECT @total;

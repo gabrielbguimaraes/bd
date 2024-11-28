@@ -1,0 +1,73 @@
+DROP PROCEDURE IF EXISTS AddProduct;
+
+DELIMITER //
+
+CREATE PROCEDURE AddProduct(
+    IN p_product_name VARCHAR(255),
+    IN p_description TEXT,
+    IN p_product_img VARCHAR(255),
+    IN p_product_stock INT,
+    IN p_product_stock_min INT,
+    IN p_category_id INT,
+    IN p_prod_brand VARCHAR(255),
+    IN p_prod_model VARCHAR(255),
+    IN p_supplier_id INT,
+    IN p_unit_id INT,
+    IN p_is_perishable BOOLEAN,
+    IN p_prod_cost_value DECIMAL(10, 2),
+    IN p_prod_sell_value DECIMAL(10, 2)
+)
+BEGIN
+    -- Inserindo um novo produto na tabela Product
+    INSERT INTO Product (
+        product_name, 
+        description, 
+        product_img, 
+        product_stock, 
+        product_stock_min, 
+        category_id, 
+        prod_brand, 
+        prod_model, 
+        supplier_id, 
+        unit_id, 
+        is_perishable, 
+        created_at, 
+        prod_cost_value, 
+        prod_sell_value
+    )
+    VALUES (
+        p_product_name, 
+        p_description, 
+        p_product_img, 
+        p_product_stock, 
+        p_product_stock_min, 
+        p_category_id, 
+        p_prod_brand, 
+        p_prod_model, 
+        p_supplier_id, 
+        p_unit_id, 
+        p_is_perishable, 
+        NOW(), 
+        p_prod_cost_value, 
+        p_prod_sell_value
+    );
+END //
+
+DELIMITER ;
+
+
+// CALL AddProduct(
+    'Produto Exemplo', 
+    'Descrição detalhada do produto', 
+    'imagem_exemplo.jpg', 
+    100, 
+    10, 
+    1, 
+    'Marca Exemplo', 
+    'Modelo Exemplo', 
+    1, 
+    1, 
+    TRUE, 
+    20.00, 
+    30.00
+);

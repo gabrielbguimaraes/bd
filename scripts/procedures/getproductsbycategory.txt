@@ -1,0 +1,8 @@
+DELIMITER //
+
+CREATE PROCEDURE GetProductsByCategory(IN categoryId INT)
+BEGIN
+    SELECT * FROM Product WHERE category_id = categoryId;
+END //
+
+DELIMITER ;

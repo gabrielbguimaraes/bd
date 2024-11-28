@@ -1,0 +1,10 @@
+DELIMITER //
+
+CREATE FUNCTION GetSupplierCount() RETURNS INT
+BEGIN
+    DECLARE totalSuppliers INT;
+    SELECT COUNT(*) INTO totalSuppliers FROM Supplier;
+    RETURN totalSuppliers;
+END //
+
+DELIMITER ;

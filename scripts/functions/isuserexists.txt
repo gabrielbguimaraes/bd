@@ -1,0 +1,10 @@
+DELIMITER //
+
+CREATE FUNCTION IsUserExists(userEmail VARCHAR(100)) RETURNS BOOLEAN
+BEGIN
+    DECLARE exists INT;
+    SELECT COUNT(*) INTO exists FROM User WHERE email = userEmail;
+    RETURN exists > 0;
+END //
+
+DELIMITER ;

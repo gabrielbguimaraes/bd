@@ -1,0 +1,10 @@
+DELIMITER //
+
+CREATE FUNCTION TotalUsers() RETURNS INT
+BEGIN
+    DECLARE total INT;
+    SELECT COUNT(*) INTO total FROM User;
+    RETURN total;
+END //
+
+DELIMITER ;

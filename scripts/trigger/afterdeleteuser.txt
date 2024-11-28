@@ -1,0 +1,40 @@
+DELIMITER //
+
+DROP TABLE IF EXISTS TriggerLog; -- Remove a tabela se ela já existir
+
+CREATE TABLE TriggerLog (
+    log_id INT AUTO_INCREMENT PRIMARY KEY,
+    log_message VARCHAR(255),
+    log_time DATETIME
+);
+
+-- Se você ainda não tiver a tabela DeletedUserLog, crie-a aqui
+DROP TABLE IF EXISTS DeletedUserLog; -- Remover a tabela se existir
+CREATE TABLE DeletedUserLog (
+    user_id INT,
+    username VARCHAR(100),
+    email VARCHAR(100),
+    deletion_time DATETIME
+);
+
+DROP TRIGGER IF EXISTS AfterDeleteUser; -- Remove a trigger se já existir
+
+CREATE TRIGGER AfterDeleteUser 
+AFTER DELETE ON User 
+FOR EACH ROW 
+BEGIN
+    -- Log da operação de deletar
+    INSERT INTO TriggerLog (log_message, log_time)
+    VALUES (CONCAT('Usuário deletado: ', OLD.user_id, ' - ', OLD.username), NOW());
+
+    -- Log no DeletedUserLog
+    INSERT INTO DeletedUserLog (user_id, username, email, deletion_time)
+    VALUES (OLD.user_id, OLD.username, OLD.email, NOW());
+END;
+//
+
+DELIMITER ;
+
+
+// DELETE FROM User
+WHERE user_id = 123;

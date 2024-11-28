@@ -1,0 +1,23 @@
+DELIMITER //
+
+CREATE TRIGGER BeforeInsertUser
+BEFORE INSERT ON User
+FOR EACH ROW
+BEGIN
+    DECLARE email_count INT;
+
+    SELECT COUNT(*)
+    INTO email_count
+    FROM User
+    WHERE email = NEW.email;
+
+    IF email_count > 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Erro: O e-mail já está em uso. Por favor, insira um e-mail diferente.';
+    END IF;
+END //
+
+DELIMITER ;
+
+
+INSERT INTO User (user_id, username, email, password, role, created_at, status, user_img)
+VALUES (1, 'john_doe', 'teste@hotmail.com', 'hashed_password', 'admin', NOW(), 'ativo', 'path/to/user_image.jpg');

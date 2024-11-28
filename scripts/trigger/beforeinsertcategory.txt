@@ -1,0 +1,21 @@
+DELIMITER //
+
+CREATE TRIGGER BeforeInsertCategory
+BEFORE INSERT ON Category
+FOR EACH ROW
+BEGIN
+  DECLARE category_count INT;
+
+  SELECT COUNT(*) INTO category_count
+  FROM Category
+  WHERE category_name = NEW.category_name;
+
+  IF category_count > 0 THEN
+    SIGNAL SQLSTATE '23000' SET MESSAGE_TEXT = 'Duplicate category name found.';
+  END IF;
+END //
+
+DELIMITER ;
+
+
+// INSERT INTO Category (category_name) VALUES ('Nova Categoria');

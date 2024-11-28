@@ -1,0 +1,32 @@
+DELIMITER //
+
+CREATE TRIGGER AfterUpdateUser
+AFTER UPDATE ON `api2`.`User`
+FOR EACH ROW
+BEGIN
+  -- Insert into AuditLog table instead of UserLog (assuming it exists)
+  INSERT INTO `api2`.`AuditLog` (
+    user_id,
+    action,
+    table_name,
+    primary_key_value,
+    old_value,
+    new_value,
+    action_date
+  ) VALUES (
+    NEW.user_id,
+    'UPDATE',
+    'User',
+    NEW.user_id,  -- Primary key value is user_id
+    CONCAT('username:', OLD.username),
+    CONCAT('username:', NEW.username),
+    NOW()
+  );
+END //
+
+DELIMITER ;
+
+
+UPDATE api2.User
+SET username = 'novo_nome_de_usuario'
+WHERE user_id = 1;
