@@ -1,8 +1,14 @@
 DELIMITER //
 
-CREATE PROCEDURE AddUser(IN userName VARCHAR(100), IN userEmail VARCHAR(100))
+DROP PROCEDURE IF EXISTS AddUser //
+
+CREATE PROCEDURE AddUser(IN userName VARCHAR(100), IN userEmail VARCHAR(100), IN userPassword VARCHAR(191))
 BEGIN
-    INSERT INTO User (name, email) VALUES (userName, userEmail);
+    INSERT INTO User (username, email, password) 
+    VALUES (userName, userEmail, userPassword);
 END //
 
 DELIMITER ;
+
+CALL AddUser('João Silva', 'joao.silva@exemplo.com', 'minhaSenhaSegura');
+
