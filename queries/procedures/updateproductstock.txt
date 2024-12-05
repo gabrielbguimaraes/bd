@@ -18,7 +18,7 @@ CREATE PROCEDURE AddProduct(
     IN p_prod_sell_value DECIMAL(10, 2)
 )
 BEGIN
-    -- Inserindo um novo produto na tabela Product
+
     INSERT INTO Product (
         product_name, 
         description, 
