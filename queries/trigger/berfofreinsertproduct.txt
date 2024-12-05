@@ -11,5 +11,5 @@ END $$
 
 DELIMITER ;
 
-INSERT INTO Product (product_name, product_stock, category_id, supplier_id, unit_id)
-VALUES ('Novo Produto', 999, 1, 1, 1);
+INSERT INTO Product (product_name, product_stock, category_id, supplier_id, unit_id, product_stock_min)
+VALUES ('Novo Produto', 999, 1, 1, 1, 10);
